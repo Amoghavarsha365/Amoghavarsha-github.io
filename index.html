@@ -1,1 +1,786 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amoghavarsha Fakkirappa Madrasi | Monochromatic Portfolio</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        mono: {
+                            950: '#0a0a0b',
+                            900: '#121215',
+                            800: '#1c1c21',
+                            700: '#282830',
+                            400: '#8e8e99',
+                            200: '#d1d1d6',
+                            100: '#f4f4f6'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0b; }
+        ::-webkit-scrollbar-thumb { background: #282830; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #8e8e99; }
+        
+        .glass-card {
+            background: rgba(18, 18, 21, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 25px -5px rgba(255, 255, 255, 0.05);
+        }
+        .glow-text {
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-mono-950 text-slate-100 font-sans selection:bg-white selection:text-black antialiased overflow-x-hidden relative">
 
+    <!-- Interactive Metallic Particle Canvas -->
+    <canvas id="particle-canvas" class="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-40 glass-card border-b border-white/10 py-4 px-6 md:px-12 transition-all">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-white via-slate-400 to-slate-800 flex items-center justify-center font-display font-extrabold text-black text-xl shadow-lg group-hover:scale-105 transition-transform">
+                    AM
+                </div>
+                <div>
+                    <span id="header-name" class="font-display font-bold text-base md:text-lg tracking-wider text-white block leading-none">AMOGHAVARSHA M.</span>
+                    <span class="text-[10px] tracking-widest text-slate-400 font-mono uppercase">Data AI • Director • Artist</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                <a href="#about" class="text-slate-400 hover:text-white transition-colors">Dual Bio</a>
+                <a href="#work" class="text-slate-400 hover:text-white transition-colors">Showcase</a>
+                <a href="#skills" class="text-slate-400 hover:text-white transition-colors">Skill Matrix</a>
+                <a href="#links" class="text-slate-400 hover:text-white transition-colors">Platforms</a>
+                <button onclick="toggleDrawer()" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-200 flex items-center gap-2">
+                    <i class="fa-solid fa-code"></i> Edit Data
+                </button>
+                <a href="#contact" class="px-5 py-2.5 rounded-full bg-white text-black font-extrabold text-xs uppercase tracking-wider transition-all hover:bg-slate-200 hover:scale-105 shadow-md">
+                    Get In Touch
+                </a>
+            </nav>
+
+            <!-- Mobile Buttons -->
+            <div class="flex items-center gap-3 md:hidden">
+                <button onclick="toggleDrawer()" class="p-2 rounded-lg bg-white/5 border border-white/10 text-white text-xs">
+                    <i class="fa-solid fa-code"></i>
+                </button>
+                <button id="menu-btn" class="text-xl text-slate-300 focus:outline-none">
+                    <i class="fa-solid fa-bars-staggered"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 px-4 flex-col gap-3 border-t border-white/10 mt-3 text-center">
+            <a href="#about" class="block py-2 text-slate-400 hover:text-white">Dual Bio</a>
+            <a href="#work" class="block py-2 text-slate-400 hover:text-white">Showcase</a>
+            <a href="#skills" class="block py-2 text-slate-400 hover:text-white">Skill Matrix</a>
+            <a href="#links" class="block py-2 text-slate-400 hover:text-white">Platforms</a>
+            <a href="#contact" class="block py-2 text-white font-bold">Contact Me</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[85vh] flex items-center justify-center px-6 md:px-12 py-16">
+            <div class="max-w-5xl mx-auto text-center space-y-8">
+                
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card text-xs md:text-sm text-slate-300 border border-white/10 shadow-sm animate-pulse">
+                    <span class="w-2 h-2 rounded-full bg-white"></span>
+                    <span id="hero-tagline">B.Sc Science & AI Engineering × Cinematic Filmmaking</span>
+                </div>
+
+                <h1 class="font-display font-extrabold text-4xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight leading-none text-white">
+                    <span id="hero-name">Amoghavarsha</span><br>
+                    <span class="bg-gradient-to-r from-white via-slate-300 to-slate-500 bg-clip-text text-transparent glow-text">F. Madrasi</span>
+                </h1>
+
+                <p id="hero-bio-short" class="max-w-3xl mx-auto text-slate-400 text-base sm:text-lg md:text-xl font-light leading-relaxed">
+                    Bridging <span class="text-white font-medium">B.Sc Academic Foundation, Data Science with AI, & Hardware Electronics</span> with creative direction in <span class="text-white font-medium">Filmmaking, CapCut & DaVinci Resolve Editing, Scrite Screenwriting, Charcoal Sketches, & Content Creation</span>.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-4">
+                    <a href="#work" class="px-8 py-4 rounded-full bg-white hover:bg-slate-200 text-black font-extrabold text-sm uppercase tracking-wider transition-all shadow-xl hover:scale-105">
+                        Explore Works <i class="fa-solid fa-arrow-down ml-2 text-xs"></i>
+                    </a>
+                    <button onclick="openVideoModal('https://www.youtube.com/embed/dQw4w9WgXcQ')" class="px-8 py-4 rounded-full glass-card hover:bg-white/10 text-white font-semibold text-sm transition-all border border-white/10 hover:border-white/30 flex items-center gap-3">
+                        <i class="fa-solid fa-play text-white"></i> Showreel Video
+                    </button>
+                    <a href="https://instagram.com/ft.amoghavarsha_385" target="_blank" class="px-8 py-4 rounded-full glass-card hover:bg-white/10 text-white font-semibold text-sm transition-all border border-white/10 flex items-center gap-2">
+                        <i class="fa-brands fa-instagram"></i> @ft.amoghavarsha_385
+                    </a>
+                </div>
+
+                <!-- Technical-Art Badges -->
+                <div class="pt-8 flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-slate-400">
+                    <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10"><i class="fa-solid fa-brain text-slate-200 mr-1"></i> Data Science & AI</span>
+                    <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10"><i class="fa-solid fa-film text-slate-200 mr-1"></i> CapCut & DaVinci Resolve</span>
+                    <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10"><i class="fa-solid fa-pen-nib text-slate-200 mr-1"></i> Scrite Screenwriting</span>
+                    <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10"><i class="fa-solid fa-paintbrush text-slate-200 mr-1"></i> Charcoal Artist</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Dual-Core Bio Section -->
+        <section id="about" class="py-20 px-6 md:px-12 bg-mono-900/60 border-y border-white/5">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Dual-Core Identity</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white">The Engineer & The Artist</h2>
+                    <p class="text-slate-400 text-sm max-w-xl mx-auto">Toggle between the two sides of Amoghavarsha's skill matrix.</p>
+
+                    <!-- Interactive Switcher Tab -->
+                    <div class="inline-flex p-1.5 rounded-2xl glass-card border border-white/10 mt-6">
+                        <button id="btn-tech" onclick="switchBio('tech')" class="px-6 py-3 rounded-xl font-bold text-sm transition-all bg-white text-black shadow-lg">
+                            <i class="fa-solid fa-microchip mr-2"></i> The Technical Mind
+                        </button>
+                        <button id="btn-creative" onclick="switchBio('creative')" class="px-6 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all">
+                            <i class="fa-solid fa-palette mr-2"></i> The Creative Soul
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Technical Content Box -->
+                <div id="bio-tech" class="grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500">
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-white">
+                        <i class="fa-solid fa-graduation-cap text-3xl text-white"></i>
+                        <h3 class="font-display font-bold text-xl text-white">B.Sc Scientific Foundation</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Solid grounding in Physics, Electronics, and analytical logic, enabling a systematic approach to complex engineering and cinematic storytelling.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-slate-400">
+                        <i class="fa-solid fa-robot text-3xl text-slate-300"></i>
+                        <h3 class="font-display font-bold text-xl text-white">Data Science with AI</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Machine Learning algorithms, Python analytics, data modeling, and AI model integration for real-world intelligent applications.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-slate-600">
+                        <i class="fa-solid fa-microchip text-3xl text-slate-400"></i>
+                        <h3 class="font-display font-bold text-xl text-white">VLSI & Robotics</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Hardware logic circuit design, microcontrollers, embedded systems, and hands-on component fabrication in robotics.</p>
+                    </div>
+                </div>
+
+                <!-- Creative Content Box -->
+                <div id="bio-creative" class="hidden grid grid-cols-1 md:grid-cols-3 gap-6 transition-all duration-500">
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-white">
+                        <i class="fa-solid fa-pen-nib text-3xl text-white"></i>
+                        <h3 class="font-display font-bold text-xl text-white">Scrite Screenwriting</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Crafting film scripts and scene breakdowns using <strong>Scrite</strong> software, focusing on narrative structure, depth, and pacing.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-slate-400">
+                        <i class="fa-solid fa-clapperboard text-3xl text-slate-300"></i>
+                        <h3 class="font-display font-bold text-xl text-white">CapCut & DaVinci Resolve</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">High-impact post-production, multi-track timeline editing, color grading, and dynamic audio rhythm assembly.</p>
+                    </div>
+                    <div class="glass-card p-6 rounded-2xl space-y-3 border-t-2 border-t-slate-600">
+                        <i class="fa-solid fa-paintbrush text-3xl text-slate-400"></i>
+                        <h3 class="font-display font-bold text-xl text-white">Charcoal & Fine Art</h3>
+                        <p class="text-xs text-slate-400 leading-relaxed">Expressive fine art portraiture, graphite shading, landscape studies, and detailed hand-drawn sketches.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Showcase Gallery Grid -->
+        <section id="work" class="py-24 px-6 md:px-12">
+            <div class="max-w-7xl mx-auto space-y-10">
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div>
+                        <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Selected Works</span>
+                        <h2 class="font-display font-extrabold text-3xl sm:text-5xl text-white">Featured Portfolio Showcase</h2>
+                    </div>
+
+                    <!-- Category Filters -->
+                    <div id="filter-container" class="flex flex-wrap gap-2 p-1.5 rounded-2xl glass-card text-xs">
+                        <button onclick="filterGallery('all')" class="filter-btn active-btn px-4 py-2 rounded-xl font-bold bg-white text-black transition-all">All Works</button>
+                        <button onclick="filterGallery('film')" class="filter-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">Filmmaking</button>
+                        <button onclick="filterGallery('art')" class="filter-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">Sketches & Art</button>
+                        <button onclick="filterGallery('tech')" class="filter-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">Tech & AI</button>
+                        <button onclick="filterGallery('photo')" class="filter-btn px-4 py-2 rounded-xl text-slate-400 hover:text-white transition-all">Photography</button>
+                    </div>
+                </div>
+
+                <!-- Gallery Cards Grid -->
+                <div id="gallery-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Skill Matrix & Toolchain -->
+        <section id="skills" class="py-20 px-6 md:px-12 bg-mono-900/60 border-t border-white/5">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Stack & Competencies</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Technical & Creative Toolchain</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Creative Tools -->
+                    <div class="glass-card p-6 rounded-2xl space-y-6">
+                        <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-clapperboard text-slate-400"></i> Filmmaking & Video Tools
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">DaVinci Resolve Color & Edit</span>
+                                    <span class="text-slate-400">92%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-white via-slate-300 to-slate-500 h-full w-[92%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">CapCut Video Editing & Reels</span>
+                                    <span class="text-slate-400">95%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-white via-slate-300 to-slate-500 h-full w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">Scrite Screenwriting Tool</span>
+                                    <span class="text-slate-400">90%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-white via-slate-300 to-slate-500 h-full w-[90%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">Charcoal & Pencil Fine Art</span>
+                                    <span class="text-slate-400">94%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-white via-slate-300 to-slate-500 h-full w-[94%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tech Tools -->
+                    <div class="glass-card p-6 rounded-2xl space-y-6">
+                        <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                            <i class="fa-solid fa-code text-slate-400"></i> Engineering & Data Stack
+                        </h3>
+
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">Python & Data Science / AI</span>
+                                    <span class="text-slate-400">88%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-slate-400 to-white h-full w-[88%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">B.Sc Physics & Analytical Logic</span>
+                                    <span class="text-slate-400">95%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-slate-400 to-white h-full w-[95%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">Robotics & Hardware Microcontrollers</span>
+                                    <span class="text-slate-400">82%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-slate-400 to-white h-full w-[82%]"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-xs font-semibold mb-1">
+                                    <span class="text-white">VLSI Design Fundamentals</span>
+                                    <span class="text-slate-400">80%</span>
+                                </div>
+                                <div class="w-full bg-white/10 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-gradient-to-r from-slate-400 to-white h-full w-[80%]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Social & Platforms Connector Hub -->
+        <section id="links" class="py-20 px-6 md:px-12">
+            <div class="max-w-7xl mx-auto space-y-12">
+                <div class="text-center space-y-3">
+                    <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Connect Digital Ecosystem</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Active Social Channels & Portfolios</h2>
+                </div>
+
+                <div id="social-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Loaded dynamically via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-24 px-6 md:px-12 bg-mono-900/60 border-t border-white/5">
+            <div class="max-w-4xl mx-auto glass-card rounded-3xl p-8 sm:p-12 border border-white/10 relative overflow-hidden">
+                <div class="text-center space-y-3 mb-10">
+                    <span class="text-slate-400 font-mono text-xs uppercase tracking-widest">Collaborate</span>
+                    <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white">Send a Message or Project Inquiry</h2>
+                    <p class="text-slate-400 text-xs sm:text-sm">Available for short film direction, screenplay writing, DaVinci/CapCut video editing, charcoal art commissions, or AI data projects.</p>
+                </div>
+
+                <form id="contact-form" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Name</label>
+                            <input type="text" required placeholder="Your Full Name" class="w-full bg-mono-950 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-white transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Email</label>
+                            <input type="email" required placeholder="your@email.com" class="w-full bg-mono-950 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-white transition-colors">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Category</label>
+                        <select class="w-full bg-mono-950 border border-white/10 rounded-xl px-4 py-3 text-slate-300 focus:outline-none focus:border-white transition-colors">
+                            <option>Filmmaking & Scrite Screenplay Collaboration</option>
+                            <option>Video Editing (CapCut / DaVinci Resolve)</option>
+                            <option>Charcoal Fine Art Commission</option>
+                            <option>Data Science / AI Engineering</option>
+                            <option>General Inquiry</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-slate-300 mb-2">Message</label>
+                        <textarea rows="4" required placeholder="Describe your project vision or message details..." class="w-full bg-mono-950 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-slate-600 focus:outline-none focus:border-white transition-colors"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-white text-black font-extrabold text-sm uppercase tracking-wider transition-all hover:bg-slate-200 shadow-lg">
+                        Send Message <i class="fa-solid fa-paper-plane ml-2"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 px-6 text-center text-slate-500 text-xs border-t border-white/5 relative z-10">
+        <p>© <span id="year"></span> Amoghavarsha Fakkirappa Madrasi. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Video Modal -->
+    <div id="video-modal" class="fixed inset-0 bg-black/90 z-50 hidden items-center justify-center p-4">
+        <div class="relative w-full max-w-4xl aspect-video bg-black rounded-2xl overflow-hidden border border-white/20">
+            <button onclick="closeVideoModal()" class="absolute top-4 right-4 z-10 text-white bg-black/60 w-10 h-10 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <iframe id="video-frame" class="w-full h-full" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Project Modal Lightbox -->
+    <div id="project-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="relative w-full max-w-3xl glass-card rounded-3xl overflow-hidden border border-white/10 my-8">
+            <button onclick="closeProjectModal()" class="absolute top-4 right-4 z-10 text-white bg-black/60 w-9 h-9 rounded-full flex items-center justify-center hover:bg-white hover:text-black transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="modal-img" src="" alt="Project Preview" class="w-full h-72 object-cover">
+            <div class="p-8 space-y-4">
+                <span id="modal-category" class="text-xs uppercase font-bold text-slate-400 font-mono"></span>
+                <h3 id="modal-title" class="font-display font-extrabold text-2xl text-white"></h3>
+                <p id="modal-description" class="text-slate-300 text-sm leading-relaxed"></p>
+                <div class="pt-4 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                    <span id="modal-tech" class="text-xs text-slate-400 font-mono"></span>
+                    <a id="modal-link" href="#" target="_blank" class="px-5 py-2.5 rounded-xl bg-white text-black text-xs font-bold transition-all hover:bg-slate-200">
+                        Open Project Link <i class="fa-solid fa-external-link ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Live JSON Data Drawer Modal -->
+    <div id="data-drawer" class="fixed inset-y-0 right-0 w-full max-w-xl glass-card border-l border-white/10 z-50 transform translate-x-full transition-transform duration-300 p-6 flex flex-col justify-between">
+        <div class="space-y-4">
+            <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-slate-400"></i> Live Portfolio Data Editor
+                </h3>
+                <button onclick="toggleDrawer()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+            <p class="text-xs text-slate-400">Edit the JSON structure below to update portfolio works and links in real time!</p>
+            <textarea id="json-editor" class="w-full h-[60vh] bg-mono-950 font-mono text-xs text-slate-200 p-4 rounded-xl border border-white/10 focus:outline-none focus:border-white leading-relaxed"></textarea>
+        </div>
+        <div class="flex gap-4 pt-4 border-t border-white/10">
+            <button onclick="saveCustomData()" class="flex-1 py-3 bg-white text-black font-bold text-xs rounded-xl hover:bg-slate-200 transition-all">Apply Changes</button>
+            <button onclick="resetDefaultData()" class="py-3 px-4 bg-white/5 text-slate-400 font-semibold text-xs rounded-xl hover:bg-white/10">Reset Defaults</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 hidden px-6 py-4 rounded-2xl glass-card border-l-4 border-white text-white shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-white text-xl"></i>
+        <div>
+            <h4 class="font-bold text-sm">Action Successful!</h4>
+            <p id="toast-msg" class="text-xs text-slate-300">Message sent successfully.</p>
+        </div>
+    </div>
+
+    <!-- Main Logic Script -->
+    <script>
+        // Data Store for Amoghavarsha F. Madrasi
+        const defaultPortfolioData = {
+            profile: {
+                name: "Amoghavarsha Fakkirappa Madrasi",
+                tagline: "B.Sc Physics & Electronics • Data Science & AI • Director & Artist",
+                shortBio: "A polymath bridging B.Sc Science, Data Science with AI, & Hardware Electronics with creative direction in Screenwriting (Scrite), Video Editing (CapCut & DaVinci Resolve), Fine Art Charcoal Sketches, & Content Creation."
+            },
+            socials: [
+                { name: "Instagram", icon: "fa-brands fa-instagram", color: "hover:border-slate-300 text-slate-200", handle: "@ft.amoghavarsha_385", url: "https://instagram.com/ft.amoghavarsha_385" },
+                { name: "YouTube", icon: "fa-brands fa-youtube", color: "hover:border-slate-300 text-slate-200", handle: "Cinematic Shorts & Vlogs", url: "https://youtube.com" },
+                { name: "GitHub", icon: "fa-brands fa-github", color: "hover:border-slate-300 text-slate-200", handle: "AI & Data Science Code", url: "https://github.com" },
+                { name: "Behance", icon: "fa-brands fa-behance", color: "hover:border-slate-300 text-slate-200", handle: "Fine Art Portfolio", url: "https://behance.net" },
+                { name: "ArtStation", icon: "fa-brands fa-artstation", color: "hover:border-slate-300 text-slate-200", handle: "Charcoal Sketches", url: "https://artstation.com" },
+                { name: "LinkedIn", icon: "fa-brands fa-linkedin-in", color: "hover:border-slate-300 text-slate-200", handle: "Amoghavarsha F M", url: "https://linkedin.com" },
+                { name: "Vimeo", icon: "fa-brands fa-vimeo-v", color: "hover:border-slate-300 text-slate-200", handle: "Films & Showreels", url: "https://vimeo.com" },
+                { name: "Email", icon: "fa-solid fa-envelope", color: "hover:border-slate-300 text-slate-200", handle: "Direct Contact", url: "mailto:amoghavarsha@example.com" }
+            ],
+            projects: [
+                {
+                    id: 1,
+                    title: "Short Film: The Echoes of Logic",
+                    category: "film",
+                    categoryLabel: "Filmmaking",
+                    image: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80",
+                    description: "Screenplay drafted in Scrite, post-produced in DaVinci Resolve & CapCut. A narrative exploring human decision-making with a sci-fi atmosphere.",
+                    tech: "Tools: Scrite Screenwriting, DaVinci Resolve, CapCut",
+                    link: "https://youtube.com"
+                },
+                {
+                    id: 2,
+                    title: "Monochrome Charcoal Portrait Study",
+                    category: "art",
+                    categoryLabel: "Sketches & Art",
+                    image: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?auto=format&fit=crop&w=800&q=80",
+                    description: "High-contrast graphite and charcoal portrait focusing on dynamic light, shadows, and anatomical precision.",
+                    tech: "Medium: Willow Charcoal & Graphite on Fine Art Paper",
+                    link: "https://instagram.com/ft.amoghavarsha_385"
+                },
+                {
+                    id: 3,
+                    title: "AI Predictive Analytics System",
+                    category: "tech",
+                    categoryLabel: "Tech & AI",
+                    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+                    description: "Python-driven Machine Learning pipeline analyzing high-volume datasets for automated trend forecasting.",
+                    tech: "Stack: Python, Pandas, Scikit-Learn, Streamlit",
+                    link: "https://github.com"
+                },
+                {
+                    id: 4,
+                    title: "Atmospheric Visual Stills",
+                    category: "photo",
+                    categoryLabel: "Photography",
+                    image: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=800&q=80",
+                    description: "Black and white monochrome photography capturing environmental textures and perspective framing.",
+                    tech: "Gear: DSLR Camera, 35mm Prime Lens",
+                    link: "https://instagram.com/ft.amoghavarsha_385"
+                },
+                {
+                    id: 5,
+                    title: "Robotics Microcontroller Unit",
+                    category: "tech",
+                    categoryLabel: "Tech & AI",
+                    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80",
+                    description: "Hardware micro-controller integration featuring sensor feedback loops and robotic logic control.",
+                    tech: "Tech: Embedded C, Circuit Sensors, VLSI Logic",
+                    link: "https://github.com"
+                },
+                {
+                    id: 6,
+                    title: "Cinematic Short Reel Cut",
+                    category: "film",
+                    categoryLabel: "Filmmaking",
+                    image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
+                    description: "Dynamic visual reel edited seamlessly using CapCut and DaVinci Resolve color grading.",
+                    tech: "Software: DaVinci Resolve, CapCut",
+                    link: "https://instagram.com/ft.amoghavarsha_385"
+                }
+            ]
+        };
+
+        let activeData = JSON.parse(JSON.stringify(defaultPortfolioData));
+
+        // Render Functions
+        function renderAll() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            
+            // Socials
+            const socialGrid = document.getElementById('social-grid');
+            socialGrid.innerHTML = '';
+            activeData.socials.forEach(s => {
+                const card = document.createElement('a');
+                card.href = s.url;
+                card.target = "_blank";
+                card.className = `p-5 rounded-2xl glass-card flex items-center gap-4 transition-all ${s.color}`;
+                card.innerHTML = `
+                    <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center text-2xl">
+                        <i class="${s.icon}"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-sm text-white">${s.name}</h4>
+                        <p class="text-xs text-slate-400 font-mono">${s.handle}</p>
+                    </div>
+                `;
+                socialGrid.appendChild(card);
+            });
+
+            // Projects Grid
+            filterGallery('all');
+        }
+
+        function filterGallery(category) {
+            const grid = document.getElementById('gallery-grid');
+            grid.innerHTML = '';
+            
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(b => {
+                b.classList.remove('bg-white', 'text-black');
+                b.classList.add('text-slate-400');
+            });
+
+            const activeBtn = Array.from(btns).find(b => b.getAttribute('onclick').includes(`'${category}'`));
+            if(activeBtn) {
+                activeBtn.classList.add('bg-white', 'text-black');
+                activeBtn.classList.remove('text-slate-400');
+            }
+
+            const items = category === 'all' 
+                ? activeData.projects 
+                : activeData.projects.filter(p => p.category === category);
+
+            items.forEach(p => {
+                const card = document.createElement('div');
+                card.className = "group glass-card rounded-2xl overflow-hidden flex flex-col justify-between";
+                card.innerHTML = `
+                    <div class="relative overflow-hidden aspect-video">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 px-3 py-1 rounded-full text-[10px] font-bold font-mono uppercase bg-black/80 text-white border border-white/10">
+                            ${p.categoryLabel}
+                        </span>
+                    </div>
+                    <div class="p-6 space-y-3 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-display font-bold text-lg text-white group-hover:text-slate-300 transition-colors">${p.title}</h3>
+                            <p class="text-slate-400 text-xs line-clamp-2 mt-2 leading-relaxed">${p.description}</p>
+                        </div>
+                        <button onclick="openProjectModal(${p.id})" class="mt-4 w-full py-2.5 rounded-xl bg-white/5 hover:bg-white hover:text-black text-white text-xs font-bold transition-all border border-white/10 flex items-center justify-center gap-2">
+                            View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Bio Switcher
+        function switchBio(type) {
+            const btnTech = document.getElementById('btn-tech');
+            const btnCreative = document.getElementById('btn-creative');
+            const bioTech = document.getElementById('bio-tech');
+            const bioCreative = document.getElementById('bio-creative');
+
+            if(type === 'tech') {
+                btnTech.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all bg-white text-black shadow-lg";
+                btnCreative.className = "px-6 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all";
+                bioTech.classList.remove('hidden');
+                bioTech.classList.add('grid');
+                bioCreative.classList.add('hidden');
+                bioCreative.classList.remove('grid');
+            } else {
+                btnCreative.className = "px-6 py-3 rounded-xl font-bold text-sm transition-all bg-white text-black shadow-lg";
+                btnTech.className = "px-6 py-3 rounded-xl font-bold text-sm text-slate-400 hover:text-white transition-all";
+                bioCreative.classList.remove('hidden');
+                bioCreative.classList.add('grid');
+                bioTech.classList.add('hidden');
+                bioTech.classList.remove('grid');
+            }
+        }
+
+        // Modals Logic
+        function openProjectModal(id) {
+            const p = activeData.projects.find(item => item.id === id);
+            if (!p) return;
+            document.getElementById('modal-img').src = p.image;
+            document.getElementById('modal-category').textContent = p.categoryLabel;
+            document.getElementById('modal-title').textContent = p.title;
+            document.getElementById('modal-description').textContent = p.description;
+            document.getElementById('modal-tech').textContent = p.tech;
+            document.getElementById('modal-link').href = p.link;
+
+            document.getElementById('project-modal').classList.remove('hidden');
+            document.getElementById('project-modal').classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            document.getElementById('project-modal').classList.add('hidden');
+            document.getElementById('project-modal').classList.remove('flex');
+        }
+
+        function openVideoModal(url) {
+            document.getElementById('video-frame').src = url;
+            document.getElementById('video-modal').classList.remove('hidden');
+            document.getElementById('video-modal').classList.add('flex');
+        }
+
+        function closeVideoModal() {
+            document.getElementById('video-frame').src = '';
+            document.getElementById('video-modal').classList.add('hidden');
+            document.getElementById('video-modal').classList.remove('flex');
+        }
+
+        // Live JSON Drawer Logic
+        function toggleDrawer() {
+            const drawer = document.getElementById('data-drawer');
+            const isHidden = drawer.classList.contains('translate-x-full');
+            if(isHidden) {
+                document.getElementById('json-editor').value = JSON.stringify(activeData, null, 2);
+                drawer.classList.remove('translate-x-full');
+            } else {
+                drawer.classList.add('translate-x-full');
+            }
+        }
+
+        function saveCustomData() {
+            try {
+                const updated = JSON.parse(document.getElementById('json-editor').value);
+                activeData = updated;
+                renderAll();
+                toggleDrawer();
+                showToast("Portfolio JSON updated successfully!");
+            } catch(err) {
+                alert("Invalid JSON format! Please check syntax.");
+            }
+        }
+
+        function resetDefaultData() {
+            activeData = JSON.parse(JSON.stringify(defaultPortfolioData));
+            document.getElementById('json-editor').value = JSON.stringify(activeData, null, 2);
+            renderAll();
+            showToast("Reset to default portfolio data!");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').textContent = msg;
+            toast.classList.remove('hidden');
+            setTimeout(() => toast.classList.add('hidden'), 3500);
+        }
+
+        // Form Submit
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            showToast("Thank you! Amoghavarsha will review your message soon.");
+            e.target.reset();
+        });
+
+        // Mobile Nav
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        });
+
+        // Particle Canvas Background
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.speedY = (Math.random() - 0.5) * 0.4;
+                this.color = Math.random() > 0.5 ? '#ffffff' : '#8e8e99';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if(this.x < 0 || this.x > canvas.width) this.speedX *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.speedY *= -1;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            for(let i = 0; i < 60; i++) particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.onload = function() {
+            resizeCanvas();
+            initParticles();
+            animateParticles();
+            renderAll();
+        }
+    </script>
+</body>
+</html>
